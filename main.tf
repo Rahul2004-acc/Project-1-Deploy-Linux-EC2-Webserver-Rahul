@@ -79,6 +79,7 @@ resource "aws_security_group" "web_sg" {
 
 
 # 7. Existing EC2 Web Server
+
 resource "aws_instance" "webserver" {
   ami           = "ami-0037855f86d0a04b4"
   instance_type = "t3.micro"
@@ -99,10 +100,15 @@ resource "aws_instance" "webserver" {
   EOF
 
   tags = {
-    Name = "Terraform-Linux-WebServer"
+    Name        = "Terraform-Web-Server"
+    Environment = "Development"
+    ManagedBy   = "Terraform"
+    Project     = "Branching-Policy"
   }
+
   lifecycle {
     ignore_changes = [user_data]
   }
 }
+
 
